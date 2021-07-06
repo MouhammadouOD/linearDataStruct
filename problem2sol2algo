@@ -1,0 +1,58 @@
+ALGORITHM problem2sol2
+VAR
+    htab1: HASH_TABLE<INTEGER,INTEGER>;
+    htab2: HASH_TABLE<INTEGER,INTEGER>;
+    sum: INTEGER;
+    i,j,hatb1len,hatb2len,value:INTEGER;
+BEGIN
+    sum:=0;
+    value:=0;
+
+    // fill htab1
+    Write("Enter the lenght of the first set: ");
+    READ(hatb1len);
+    FOR i FROM 0 TO hatb1len-1 STEP 1  DO
+        Write("give the element in index",i);
+        READ(value);
+        //check if the value already exists
+        FOR j FROM 0 TO hatb1len-1 STEP 1  DO
+            WHILE (htab1.get(i)=htab1.get(j) AND i<>j) DO
+                Write("this value already exists give another number",i);
+                READ(value);
+            END_WHILE
+        END_FOR
+
+        htab1.insert(i,value);
+    END_FOR
+
+    // fill htab2
+    Write("Enter the lenght of the second set: ");
+    READ(hatb2len);
+    FOR i FROM 0 TO hatb12en-1 STEP 1  DO
+        Write("give the element in index",i);
+        READ(value);
+        //check if the value already exists
+        FOR j FROM 0 TO hatb2len-1 STEP 1  DO
+            WHILE (htab2.get(i)=htab2.get(j) AND i<>j) DO
+                Write("this value already exists give another number",i);
+                READ(value);
+            END_WHILE
+        END_FOR
+
+        htab2.insert(i,value);
+    END_FOR
+
+    //lets calculate the sum of overlapping elements of the sets
+
+    FOR i FROM 0 TO hatb1len-1 STEP 1  DO
+        FOR j FROM 0 TO hatb12en-1 STEP 1  DO
+            IF (htab1.get(i)=htab2.get(j)) THEN
+                sum:=sum + 2*htab1.get(i);
+            END_IF
+        END_FOR
+        
+    END_FOR
+
+     //Display the result 
+    Write("The sum of overlapping elements of the given sets is :" ,sum);
+END
